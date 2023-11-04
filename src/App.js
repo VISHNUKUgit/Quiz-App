@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from "react-router-dom";
+import Home from "./Pages/Home";
+import Quiz from "./Pages/Quiz";
+import Result from "./Pages/Result";
+import { useState } from "react";
 
 function App() {
+  const [quizData,setQuizData] = useState([])
+  const [name,setName] = useState("")
+  const [score,setScore] = useState(0)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="">
+      <Routes>
+        <Route path="/" element={<Home setName={setName} name={name} />}/>
+        <Route path="/quiz" element={<Quiz setQuizData={setQuizData} quizData={quizData} setScore={setScore} score={score} />}/>
+        <Route path="/result" element={<Result quizData={quizData} score={score} name={name} setQuizData={setQuizData} setScore={setScore} setName={setName}/>}/>
+      </Routes>
     </div>
   );
 }
