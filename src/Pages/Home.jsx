@@ -1,9 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-function Home({setName,name}) {
+function Home({setName,setQuizData,setScore}) {
   // console.log(name);
-
+const handleClear =()=>{
+  setQuizData([])
+  setScore()
+}
   return (
     <div className='w-100 bg-success d-flex justify-content-center align-items-center min-vh-100'>
       <div className='d-flex w-75 h-75 shadow border  p-1'>
@@ -13,7 +16,7 @@ function Home({setName,name}) {
           <div className='w-50 d-flex flex-column justify-content-center align-items-center'>
                 <input type="text" className='form-control w-75' placeholder='Enter your name' onChange={(e)=>setName(e.target.value)}/>
                 <Link to={'/quiz'} className='w-75'>
-                <button className='btn btn-warning w-100 mt-2'>START</button>
+                <button onClick={handleClear} className='btn btn-warning w-100 mt-2'>START</button>
                 </Link>
           </div>
       </div>   

@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="">
       <Routes>
-        <Route path="/" element={<Home setName={setName} name={name} />}/>
+        <Route path="/" element={<Home setName={setName} name={name} setQuizData={setQuizData} setScore={setScore}  />}/>
         <Route path="/quiz" element={<Quiz setQuizData={setQuizData} quizData={quizData} setScore={setScore} score={score} />}/>
         <Route path="/result" element={<Result quizData={quizData} score={score} name={name} setQuizData={setQuizData} setScore={setScore} setName={setName}/>}/>
       </Routes>
