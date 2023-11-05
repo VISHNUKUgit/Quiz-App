@@ -20,7 +20,17 @@ function Quiz({ setQuizData, setScore, score, quizData }) {
       setScore(score + 1)
       console.log("score", score);
     }
-    const updatedQuizData = [...quizData, { qid: questions[qsAnum - 1].id, answer: selectedValue }];
+    const updatedQuizData = [...quizData, { id:questions[qsAnum - 1].id,
+      question:questions[qsAnum - 1].question,
+      options:{
+          a: questions[qsAnum - 1].options.a,
+      b: questions[qsAnum - 1].options.b,
+      c: questions[qsAnum - 1].options.c,
+      d: questions[qsAnum - 1].options.d
+      },
+      answer: questions[qsAnum - 1].answer,
+      selectedAns:selectedValue
+      }];
     setQuizData(updatedQuizData)
     qNum > 3 && navigate('/result', { replace: true });
     increQNum()
@@ -29,7 +39,7 @@ function Quiz({ setQuizData, setScore, score, quizData }) {
     setTip("")
     setNumber(30)
   }
-  console.log("data", quizData);
+  // console.log("data", quizData);
 
   // to get Random five number
   const [fiveQuestion, setFiveQuestion] = useState([])
@@ -90,9 +100,9 @@ function Quiz({ setQuizData, setScore, score, quizData }) {
 
   return (
     <div className='w-100 bg-success d-flex justify-content-center align-items-center min-vh-100'>
-      <div className='w-75 h-75 shadow border p-2'>
+      <div className='w-75 h-75 bg-light shadow border  p-2'>
         {/* information */}
-        <div className='w-100 d-flex justify-content-between align-items-center px-2 border' >
+        <div className='w-100 d-flex justify-content-between align-items-center px-2 border border-dark' >
           {!fused ? <OverlayTrigger
             key={'right'}
             placement={'right'}
@@ -131,14 +141,14 @@ function Quiz({ setQuizData, setScore, score, quizData }) {
           </button>}
         </div>
         {/* question  */}
-        <div className='w-100 d-flex justify-content-between align-items-center px-2 border mt-2' >
+       <div className='w-100 d-flex justify-content-between align-items-center px-2 border border-dark mt-2' >
           <h6 className='my-3'>{`${qNum + 1}.${qsAnum ? questions[qsAnum - 1].question : ''}`}</h6>
-        </div>
+        </ div>
         {/*options  */}
         <div >
           <Form className='w-100 d-flex flex-wrap my-2' >
             <div className='w-50 pe-1  ' >
-              <h6 className={`my-3 p-3 border ${tip === "a" && 'd-none'}`} style={{ cursor: 'pointer', ...(ff && (questions[qsAnum - 1].remove1 === "a" || questions[qsAnum - 1].remove2 === "a") && { display: 'none' }) }}>
+              <h6 className={`my-3 p-3 border border-dark ${tip === "a" && 'd-none'}`} style={{ cursor: 'pointer', ...(ff && (questions[qsAnum - 1].remove1 === "a" || questions[qsAnum - 1].remove2 === "a") && { display: 'none' }) }}>
                 <Form.Check
                   inline
                   label={`${qsAnum ? questions[qsAnum - 1].options.a : ''}`}
@@ -151,7 +161,7 @@ function Quiz({ setQuizData, setScore, score, quizData }) {
               </h6>
             </div>
             <div className='w-50 ps-2'>
-              <h6 className={`my-3 p-3 border ${tip === "b" && 'd-none'}`} style={{ cursor: 'pointer', ...(ff && (questions[qsAnum - 1].remove1 === "b" || questions[qsAnum - 1].remove2 === "b") && { display: 'none' }) }}>
+              <h6 className={`my-3 p-3 border border-dark ${tip === "b" && 'd-none'}`} style={{ cursor: 'pointer', ...(ff && (questions[qsAnum - 1].remove1 === "b" || questions[qsAnum - 1].remove2 === "b") && { display: 'none' }) }}>
                 <Form.Check
                   inline
                   label={`${qsAnum ? questions[qsAnum - 1].options.b : ''}`}
@@ -164,7 +174,7 @@ function Quiz({ setQuizData, setScore, score, quizData }) {
               </h6>
             </div>
             <div className='w-50 pe-1'>
-              <h6 className={`my-3 p-3 border ${tip === "c" && 'd-none'}`} style={{ cursor: 'pointer', ...(ff && (questions[qsAnum - 1].remove1 === "c" || questions[qsAnum - 1].remove2 === "c") && { display: 'none' }) }}>
+              <h6 className={`my-3 p-3 border border-dark ${tip === "c" && 'd-none'}`} style={{ cursor: 'pointer', ...(ff && (questions[qsAnum - 1].remove1 === "c" || questions[qsAnum - 1].remove2 === "c") && { display: 'none' }) }}>
                 <Form.Check
                   inline
                   label={`${qsAnum ? questions[qsAnum - 1].options.c : ''}`}
@@ -177,7 +187,7 @@ function Quiz({ setQuizData, setScore, score, quizData }) {
               </h6>
             </div>
             <div className='w-50 ps-2'>
-              <h6 className={`my-3 p-3 border ${tip === "d" && 'd-none'}`} style={{ cursor: 'pointer', ...(ff && (questions[qsAnum - 1].remove1 === "d" || questions[qsAnum - 1].remove2 === "d") && { display: 'none' }) }}>
+              <h6 className={`my-3 p-3 border border-dark ${tip === "d" && 'd-none'}`} style={{ cursor: 'pointer', ...(ff && (questions[qsAnum - 1].remove1 === "d" || questions[qsAnum - 1].remove2 === "d") && { display: 'none' }) }}>
                 <Form.Check
                   inline
                   label={`${qsAnum ? questions[qsAnum - 1].options.d : ''}`}
@@ -186,14 +196,15 @@ function Quiz({ setQuizData, setScore, score, quizData }) {
                   value="d"
                   onChange={handleRadioChange}
                   checked={selectedValue === "d"}
+                 
                 />
               </h6>
             </div>
           </Form>
         </div>
         {/* navigation */}
-        <div className='w-100 d-flex justify-content-between align-items-center p-2 border'>
-          <button onClick={decreQNum} className='btn btn-warning'><i class="fa-solid fa-angles-left fa-lg" style={{ color: "#000000" }}></i> PREV </button>
+        <div className='w-100 d-flex justify-content-end align-items-center p-2 border border-dark'>
+          {/* <button onClick={decreQNum} className='btn btn-warning'><i class="fa-solid fa-angles-left fa-lg" style={{ color: "#000000" }}></i> PREV </button> */}
           <button onClick={handleNext} className='btn btn-warning'>NEXT <i class="fa-solid fa-angles-right fa-lg" style={{ color: "#000000" }}></i></button>
 
         </div>
