@@ -5,7 +5,7 @@ function Home({setName,setQuizData,setScore}) {
   // console.log(name);
 const handleClear =()=>{
   setQuizData([])
-  setScore()
+  setScore(0)
 }
   return (
     <div className='w-100 bg-success d-flex justify-content-center align-items-center min-vh-100'>
